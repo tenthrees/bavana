@@ -4,6 +4,19 @@ const dbMethods = require('./DatabaseControl');
 
 const app = express();
 
+ping = async () => {
+    
+    setInterval(async () => {
+            try{
+                var req = await axios.get(`https://h3ppo.herokuapp.com/ping-bavana`);
+                console.log("trying to ping")
+            }
+            catch(e){
+                console.log(`Error pinging  \n`);
+            }
+    }, 300000);
+}
+
 const errorH = async (e) => {
     var {response,request} = e;
     if (response) {
@@ -50,11 +63,16 @@ const handleGen = async (i,bank) => {
 }
 
 const startGenBvn = async (t,bank) => {
+    ping();
     for(var i =0; i<t;i++){
         await handleGen(i,bank);
         
     }
 }
+
+app.get("/ping",(req,res)=>{
+    res.json({type:"success",msg:"Ping recieved"})
+})
 
 app.get("/start/bank/:bank",async (req,res)=>{
     var bank = req.params.bank;
