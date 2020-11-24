@@ -20,11 +20,10 @@ ping = async () => {
 const errorH = async (e) => {
     var {response,request} = e;
     if (response) {
-        console.log(response.data);
         console.log(response.status);
     }
     else if(request) {
-        console.log(request);
+        console.log((request.constructor.name == "Object") ? Object.keys(request) : "");
     }
     else console.log(e.message);
 }
