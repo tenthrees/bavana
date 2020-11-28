@@ -7,16 +7,18 @@ const axios = require('axios');
 const dbMethods = {
     insertBvnRec : async (rec) => {
         var {bvn,firstName,middleName,lastName,dateOfBirth,phoneNumber,registrationDate,enrollmentBank,enrollmentBranch,email,gender,phoneNumber2,levelOfAccount,lgaOfOrigin,lgaOfResidence,maritalStatus,nin,nameOnCard,nationality,stateOfOrigin,stateOfResidence,title,watchListed,base64Image} = rec;
-        var q = `INSERT INTO bvnRec(bvn,firstName,middleName,lastName,dateOfBirth,phoneNumber,registrationDate,enrollmentBank,enrollmentBranch,email,gender,phoneNumber2,levelOfAccount,lgaOfOrigin,lgaOfResidence,maritalStatus,nin,nameOnCard,nationality,stateOfOrigin,stateOfResidence,title,watchListed,base64Image)
-                VALUES('${bvn}','${firstName}','${middleName}','${lastName}','${dateOfBirth}','${phoneNumber}','${registrationDate}','${enrollmentBank}','${enrollmentBranch}','${email}','${gender}','${phoneNumber2}','${levelOfAccount}','${lgaOfOrigin}','${lgaOfResidence}','${maritalStatus}','${nin}','${nameOnCard}','${nationality}','${stateOfOrigin}','${stateOfResidence}','${title}','${watchListed}','${base64Image}')`
-        connection.query(q,(e,r,f)=>{
-            if(e) console.log(e.message);
+        var val = [bvn,firstName,middleName,lastName,dateOfBirth,phoneNumber,registrationDate,enrollmentBank,enrollmentBranch,email,gender,phoneNumber2,levelOfAccount,lgaOfOrigin,lgaOfResidence,maritalStatus,nin,nameOnCard,nationality,stateOfOrigin,stateOfResidence,title,watchListed,base64Image];
+        var q = `INSERT INTO 'bvnRec'('bvn','firstName','middleName','lastName','dateOfBirth','phoneNumber','registrationDate','enrollmentBank','enrollmentBranch','email','gender','phoneNumber2','levelOfAccount','lgaOfOrigin','lgaOfResidence','maritalStatus','nin','nameOnCard','nationality','stateOfOrigin','stateOfResidence','title','watchListed','base64Image') VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+        connection.query(q,val,(e,r,f)=>{
+            if(e) {
+                console.log("--here---")
+                console.log(e);
+            }
             else {
                 console.log(`+i`);
             };
         })
     },
-    
     totalBank : async (bank) => {
         var q = `SELECT COUNT(*) FROM bank${bank}`;
         return new Promise((resolve,reject)=>{
@@ -37,7 +39,8 @@ const dbMethods = {
         return new Promise((resolve,reject)=>{
             connection.query(q,(e,r,f)=>{
                 if(e) {
-                    console.log(e.message);
+                    console.log("--herree");
+                    //console.log(e.message);
                     reject(e);
                 }
                 else if (r.length > 0){

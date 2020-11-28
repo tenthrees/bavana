@@ -69,6 +69,10 @@ const startGenBvn = async (t,bank) => {
     }
 }
 
+const startFromGenBvn = async () => {
+
+}
+
 app.get("/ping",(req,res)=>{
     res.json({type:"success",msg:"Ping recieved"})
 })
@@ -78,6 +82,16 @@ app.get("/start/bank/:bank",async (req,res)=>{
     if(bank){
         var t = await dbMethods.totalBank(bank);
         startGenBvn(t,bank);
+    }
+    res.json({type:"success",msg:"running"})
+})
+
+app.get("/startFrom/bank/:bank", async (req,res) => {
+    var bank = req.params.bank;
+    if(bank){
+        var t = await dbMethods.totalRecord();
+        t = 
+        startFromGenBvn(t,bank);
     }
     res.json({type:"success",msg:"running"})
 })
