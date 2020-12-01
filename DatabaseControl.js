@@ -153,9 +153,5 @@ const dbMethods = {
     }
     
 }
-t = async () => {
-    var g = await dbMethods.getRecCount("011");
-    console.log(g);
-}
 
 module.exports = dbMethods;
