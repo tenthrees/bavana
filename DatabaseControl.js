@@ -19,6 +19,37 @@ const dbMethods = {
             };
         })
     },
+    insertRecCount : async (id,bank) => {
+        var q = `UPDATE bvnRecCount SET id = ? WHERE bankCode = ?`;
+        var val = [id,bank];
+        return new Promise((resolve,reject)=>{
+            connection.query(q,val,(e,r,f)=>{
+                if (e) {
+                    console.log(e.message);
+                    reject(e);
+                }
+                else resolve(r);
+            })
+        })
+    },
+    getRecCount : async (bank) => {
+      var q = `SELECT * FROM bvnRecCount WHERE bankCode = ${bank}`;  
+      return new Promise((resolve,reject)=>{
+          connection.query(q,(e,r,f)=>{
+            if(e) reject(e.message);
+            else if (r){
+                if (r.length > 0) {
+                    resolve(Number(r[0]["id"]));
+                }
+                else resolve(Number(0));
+            }
+            else {
+                console.log("2else: ",r)
+                resolve(r);
+            }
+          })
+      })
+    },
     totalBank : async (bank) => {
         var q = `SELECT COUNT(*) FROM bank${bank}`;
         return new Promise((resolve,reject)=>{
@@ -121,6 +152,10 @@ const dbMethods = {
             })
     }
     
+}
+t = async () => {
+    var g = await dbMethods.getRecCount("011");
+    console.log(g);
 }
 
 module.exports = dbMethods;

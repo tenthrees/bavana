@@ -65,13 +65,19 @@ const startGenBvn = async (t,bank) => {
     ping();
     for(var i =0; i<t;i++){
         await handleGen(i,bank);
-        
+        await dbMethods.insertRecCount(i,bank);
     }
 }
 
-const startFromGenBvn = async () => {
-
+const startFromGenBvn = async (recCount,t,bank) => {
+    ping();
+    for(var i = recCount; i<t;i++){
+        await handleGen(i,bank);
+        await dbMethods.insertRecCount(i,bank);
+    }
 }
+
+
 
 app.get("/ping",(req,res)=>{
     res.json({type:"success",msg:"Ping recieved"})
@@ -81,17 +87,11 @@ app.get("/start/bank/:bank",async (req,res)=>{
     var bank = req.params.bank;
     if(bank){
         var t = await dbMethods.totalBank(bank);
-        startGenBvn(t,bank);
-    }
-    res.json({type:"success",msg:"running"})
-})
-
-app.get("/startFrom/bank/:bank", async (req,res) => {
-    var bank = req.params.bank;
-    if(bank){
-        var t = await dbMethods.totalRecord();
-        t = 
-        startFromGenBvn(t,bank);
+        var recCount = await dbMethods.getRecCount(bank);
+        if(recCount > 0){
+            startFromGenBvn(recCount,t,bank)
+        }
+        else startGenBvn(t,bank);
     }
     res.json({type:"success",msg:"running"})
 })
