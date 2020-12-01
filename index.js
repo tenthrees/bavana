@@ -86,8 +86,9 @@ app.get("/ping",(req,res)=>{
 app.get("/start/bank/:bank",async (req,res)=>{
     var bank = req.params.bank;
     if(bank){
+        var recCount = await dbMethods.gR(bank);
         var t = await dbMethods.totalBank(bank);
-        var recCount = await dbMethods.getRecCount(bank);
+        
         if(recCount > 0){
             startFromGenBvn(recCount,t,bank)
         }
