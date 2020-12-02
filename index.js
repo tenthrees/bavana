@@ -57,6 +57,7 @@ const handleGen = async (i,bank) => {
         bvnExists = await dbMethods.bvnExists(bvn);    
         if(!bvnExists){
             verifyBvn(bvn);
+            dbMethods.insertRecCount(i,bank);
         }
     }
 }
@@ -65,7 +66,6 @@ const startGenBvn = async (t,bank) => {
     ping();
     for(var i =0; i<t;i++){
         await handleGen(i,bank);
-        await dbMethods.insertRecCount(i,bank);
     }
 }
 

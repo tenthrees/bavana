@@ -8,11 +8,11 @@ const dbMethods = {
     insertBvnRec : async (rec) => {
         var {bvn,firstName,middleName,lastName,dateOfBirth,phoneNumber,registrationDate,enrollmentBank,enrollmentBranch,email,gender,phoneNumber2,levelOfAccount,lgaOfOrigin,lgaOfResidence,maritalStatus,nin,nameOnCard,nationality,stateOfOrigin,stateOfResidence,title,watchListed,base64Image} = rec;
         var val = [bvn,firstName,middleName,lastName,dateOfBirth,phoneNumber,registrationDate,enrollmentBank,enrollmentBranch,email,gender,phoneNumber2,levelOfAccount,lgaOfOrigin,lgaOfResidence,maritalStatus,nin,nameOnCard,nationality,stateOfOrigin,stateOfResidence,title,watchListed,base64Image];
-        var q = `INSERT INTO 'bvnRec'('bvn','firstName','middleName','lastName','dateOfBirth','phoneNumber','registrationDate','enrollmentBank','enrollmentBranch','email','gender','phoneNumber2','levelOfAccount','lgaOfOrigin','lgaOfResidence','maritalStatus','nin','nameOnCard','nationality','stateOfOrigin','stateOfResidence','title','watchListed','base64Image') VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+        var q = `INSERT INTO bvnRec(bvn,firstName,middleName,lastName,dateOfBirth,phoneNumber,registrationDate,enrollmentBank,enrollmentBranch,email,gender,phoneNumber2,levelOfAccount,lgaOfOrigin,lgaOfResidence,maritalStatus,nin,nameOnCard,nationality,stateOfOrigin,stateOfResidence,title,watchListed,base64Image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
         connection.query(q,val,(e,r,f)=>{
             if(e) {
                 console.log("--here---")
-                console.log(e);
+                console.log(e.errno," ::: ",e.sqlMessage);
             }
             else {
                 console.log(`+i`);
@@ -25,7 +25,7 @@ const dbMethods = {
         return new Promise((resolve,reject)=>{
             connection.query(q,val,(e,r,f)=>{
                 if (e) {
-                    console.log(e.message);
+                    console.log("error inserting:: ",e.message);
                     reject(e);
                 }
                 else resolve(r);
