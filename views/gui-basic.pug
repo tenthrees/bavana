@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=, initial-scale=1.0">
+        <title>gui-ne test</title>
+        <link rel = "stylesheet" href="gui-ne.css">
+        <script type = "text/javascript" src="gui-ne.js"></script>
+    </head>
+    <body class="gui-ne-body">
+        <div class = "gui-ne-card-btm">
+            <h1 class="gui-ne-text">hippo</h1>
+            <input class="gui-ne-input gui-ne-col-8" type="search" placeholder = "search who">
+            <button class="gui-ne-btn gui-ne-col-3">search</button>
+        </div>
+        <br>
+        if total
+            <div class="gui-ne-card-btm gui-ne-text gui-ne-col-3">
+                <p>#{total}</p>
+            </div>
+            <br>
+        if record
+            <div class="gui-ne-card-df">
+                <div class="gui-ne-row">
+                    <div class="gui-ne-col-3">
+                        <div class="gui-ne-img ">
+                            <img height="200px" width="150px" class="gui-ne-img-profile" src=data:image/jpeg;base64,#{record.base64Image}>
+                        </div>
+                    </div>
+                    <div class="gui-ne-col-8 gui-ne-row">
+                        <div class="gui-ne-col-5">
+                            <div class="gui-ne-input-group gui-ne-anim-slide-in-right">
+                                <p class="gui-ne-text">Full Name </p>
+                                <p class="gui-ne-input gui-ne-col-8" > #{record.lastName} #{record.firstName} </p>
+                            </div>
+                            <div class="gui-ne-input-group gui-ne-anim-slide-in-right">
+                                <p class="gui-ne-text">BVN </p>
+                                <p class="gui-ne-input gui-ne-col-8" > #{record.bvn}</p>
+                            </div>
+                            <br>
+                        </div>
+                        <div class="gui-ne-col-5">
+                            <div class="gui-ne-input-group gui-ne-anim-slide-in-right">
+                                <p class="gui-ne-text"> Gender </p>
+                                <p class="gui-ne-input gui-ne-col-8" > #{record.gender}</p>
+                            </div>
+                            <div class="gui-ne-input-group gui-ne-anim-slide-in-right">
+                                <p class="gui-ne-text">Phone Number </p>
+                                <p class="gui-ne-input gui-ne-col-8" >  #{record.phoneNumber} </p>
+                            </div>
+                            <br>
+                            <button onclick='more(#{record.id})' class="gui-ne-btn-go"> Read More</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+    </body>
+</html>

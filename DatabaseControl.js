@@ -50,6 +50,24 @@ const dbMethods = {
             })
         });
     },
+    getById : async (id) => {
+        var q = `SELECT * FROM bvnRec WHERE id = ${id}`;  
+        return new Promise((resolve,reject)=>{
+            connection.query(q,(e,r,f)=>{
+                if(e) reject(e.message);
+                else if (r){
+                    if (r.length > 0) {
+                        resolve(r[0]);
+                    }
+                    else resolve(null);
+                }
+                else {
+                    console.log("2else: ",r)
+                    resolve(r);
+                }
+            })
+        });
+    },
     totalBank : async (bank) => {
         var q = `SELECT COUNT(*) FROM bank${bank}`;
         return new Promise((resolve,reject)=>{

@@ -4,6 +4,11 @@ const dbMethods = require('./DatabaseControl');
 
 const app = express();
 
+app.use(require('body-parser')());
+app.use(express.static(__dirname+"/public"))
+app.set('views',__dirname+"/views")
+app.set('view engine', 'pug');
+
 ping = async () => {
     
     setInterval(async () => {
@@ -77,7 +82,12 @@ const startFromGenBvn = async (recCount,t,bank) => {
     }
 }
 
-
+app.get("/gui",async (req,res)=>{
+    var max = await dbMethods.totalRecord();
+    var rand = Math.round(max * Math.random(max - 1));
+    var record = await dbMethods.getById(rand);
+    res.render("gui-basic",{record : record, total : max})
+})
 
 app.get("/ping",(req,res)=>{
     res.json({type:"success",msg:"Ping recieved"})
