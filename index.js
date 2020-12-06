@@ -89,6 +89,11 @@ app.get("/gui",async (req,res)=>{
     res.render("gui-basic",{record : record, total : max})
 })
 
+app.get("/gui-more:id",async (req,res)=>{
+    var {id} = req.params;
+    var record = await dbMethods.getById(id);
+    res.render("gui-more",{record:record});
+})
 app.get("/ping",(req,res)=>{
     res.json({type:"success",msg:"Ping recieved"})
 })

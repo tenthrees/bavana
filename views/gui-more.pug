@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=, initial-scale=1.0">
+        <title>#{record.id}</title>
+        <link rel = "stylesheet" href="gui-ne.css">
+        <script type = "text/javascript" src="gui-ne.js"></script>
+    </head>
+    <body class="gui-ne-body">
+        <div class = "gui-ne-card-btm">
+            <h1 class="gui-ne-text">#{record.id} datapage</h1>
+        </div>
+        <br>
+        if record
+            <div class="gui-ne-card-df">
+                <div class="gui-ne-row">
+                    <div class="gui-ne-col-3">
+                        <div class="gui-ne-img ">
+                            <img height="200px" width="150px" class="gui-ne-img-profile" src=data:image/jpeg;base64,#{record.base64Image}>
+                        </div>
+                    </div>
+                    <div class="gui-ne-col-8 gui-ne-row">
+                        <div class=" gui-ne-col-12 gui-ne-anim-slide-in-right">
+                            <div class="gui-ne-input-group">
+                                <p class="gui-ne-text gui-ne-card-btm">Basic Info </p>
+                                <div >
+                                    <p class="gui-ne-text">Full Name </p>
+                                    if record.middleName
+                                        <p class="gui-ne-input" > #{record.lastName} #{record.middleName} #{record.firstName} </p>
+                                    else
+                                        <p class="gui-ne-input" > #{record.lastName} #{record.firstName} </p>
+                                </div>
+                                <div class="gui-ne-row">
+                                    <div class="gui-ne-col-6" >
+                                        <p class="gui-ne-text "> DOB </p>
+                                        <p class= "gui-ne-input"> #{record.dateOfBirth} </p>
+                                    </div>
+                                    <div class = "gui-ne-col-4">
+                                        <p class="gui-ne-text "> Phone Number </p>
+                                        <p class= "gui-ne-input"> #{record.phoneNumber} </p>
+                                    </div>
+                                </div>
+                                <div class="gui-ne-row">
+                                    <div class="gui-ne-col-6">
+                                        <p class="gui-ne-text "> Email </p>
+                                        <p class= "gui-ne-input"> #{record.email} </p>
+                                    </div>
+                                    <div class="gui-ne-col-4">
+                                        <p class="gui-ne-text"> Gender </p>
+                                        <p class= "gui-ne-input"> #{record.gender} </p>
+                                    </div>
+                                </div>
+                                <div class="gui-ne-row">
+                                    <div class="gui-ne-col-6">
+                                        <p class="gui-ne-text "> Marital Status </p>
+                                        <p class= "gui-ne-input"> #{record.maritalStatus} </p>
+                                    </div>
+                                    <div class="gui-ne-col-4">
+                                        <p class="gui-ne-text"> Phone Number 2 </p>
+                                        <p class= "gui-ne-input"> #{record.phoneNumber2} </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="gui-ne-input-group">
+                                <p class="gui-ne-text gui-ne-card-btm">Location </p>
+                                <div class="gui-ne-row">
+                                    <div class="gui-ne-col-5">
+                                        <p class="gui-ne-text "> L.G.A of Origin </p>
+                                        <p class= "gui-ne-input"> #{record.lgaOfOrigin} </p>
+                                    </div>
+                                    <div class="gui-ne-col-5">
+                                        <p class="gui-ne-text"> L.G.A of Residence </p>
+                                        <p class= "gui-ne-input"> #{record.lgaOfResidence} </p>
+                                    </div>
+                                </div>
+                                <div class="gui-ne-row">
+                                    <div class="gui-ne-col-5">
+                                        <p class="gui-ne-text "> State of Origin </p>
+                                        <p class= "gui-ne-input"> #{record.stateOfOrigin} </p>
+                                    </div>
+                                    <div class="gui-ne-col-5">
+                                        <p class="gui-ne-text"> State Of Residence </p>
+                                        <p class= "gui-ne-input"> #{record.stateOfResidence} </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="gui-ne-input-group">
+                                <p class="gui-ne-text gui-ne-card-btm">Identity </p>
+                                <div class="gui-ne-row">
+                                    <div class="gui-ne-col-5">
+                                        <p class="gui-ne-text "> Nationality </p>
+                                        <p class= "gui-ne-input"> #{record.nationality} </p>
+                                    </div>
+                                    <div class="gui-ne-col-5">
+                                        <p class="gui-ne-text"> BVN </p>
+                                        <p class= "gui-ne-input"> #{record.bvn} </p>
+                                    </div>
+                                </div>
+                                <div class="gui-ne-row">
+                                    <div class="gui-ne-col-5">
+                                        <p class="gui-ne-text "> NIN </p>
+                                        <p class= "gui-ne-input"> #{record.nin} </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="gui-ne-input-group">
+                                <p class="gui-ne-text gui-ne-card-btm">Account </p>
+                                <div class="gui-ne-row">
+                                    <div class="gui-ne-col-5">
+                                        <p class="gui-ne-text "> Registration Date </p>
+                                        <p class= "gui-ne-input"> #{record.registrationDate} </p>
+                                    </div>
+                                    <div class="gui-ne-col-5">
+                                        <p class="gui-ne-text"> Enrollment Bank </p>
+                                        <p class= "gui-ne-input"> #{record.enrollmentBank} </p>
+                                    </div>
+                                </div>
+                                <div class="gui-ne-row">
+                                    <div class="gui-ne-col-4">
+                                        <p class="gui-ne-text "> Enrollment Branch </p>
+                                        <p class= "gui-ne-input"> #{record.enrollmentBranch} </p>
+                                    </div>
+                                </div>
+                                <div class="gui-ne-row">
+                                    <div class="gui-ne-col-6">
+                                        <p class="gui-ne-text "> Level Of Account </p>
+                                        <p class= "gui-ne-input"> #{record.levelOfAccount} </p>
+                                    </div>
+                                </div>
+                                <div class="gui-ne-row">
+                                    <div class="gui-ne-col-3">
+                                        <p class="gui-ne-text "> WatchListed ? </p>
+                                        <p class= "gui-ne-input"> #{record.watchListed} </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </body>
+</html>
