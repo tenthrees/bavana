@@ -275,6 +275,16 @@ SELECT  /
     box-shadow: var(--default-shadow);
 }
 
+.gui-ne-text-code{
+    font-family: var(--ff);
+    border-radius: 2px;
+    font-size : 10px;
+    color: white;
+    margin : 5px;
+    padding: 1px;
+    text-shadow :var(--default-text-shadow) ;
+}
+
 .gui-ne-text{
     font-family: var(--ff);
     border-radius: 2px;
@@ -295,7 +305,18 @@ SELECT  /
     margin-right: -15px;
     margin-left: -15px
 }
+/*
+//////////
+MARGINS  /
+//////////
+*/
+.gui-ne-margin-0{
+    margin : 0px;
+}
 
+.gui-ne-margin-1{
+    margin : 1px;
+}
 
 /*
 /////////
@@ -340,6 +361,8 @@ INPUT   /
     border-left: .5px solid var(--g);
     border-right: .5px solid var(--g);
 }
+
+
 
 .gui-ne-input{
     border:none;
@@ -431,6 +454,36 @@ TABLULAR  //
     max-width:100%
 }
 /*/////////////////////////////////////////*/
+
+/*
+///////
+POP  //
+///////
+*/
+.gui-ne-pop{
+    position : sticky;
+    background-color: var(--b);
+}
+.gui-ne-pop-top-left{
+    border-left : 1px double var(--g);
+    top : 0px;
+    left : 0px;
+}
+.gui-ne-pop-top-right{
+    
+}
+.gui-ne-pop-top-center{
+    
+}
+.gui-ne-pop-bottom-left{
+    
+}
+.gui-ne-pop-bottom-right{
+    
+}
+.gui-ne-pop-bottom-center{
+    
+}
 
 /*
 ///////////////

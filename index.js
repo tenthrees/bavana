@@ -81,12 +81,38 @@ const startFromGenBvn = async (recCount,t,bank) => {
         await dbMethods.insertRecCount(i,bank);
     }
 }
-
+var reply = [
+    "id",
+    "bvn",
+    "firstName",
+    "middleName",
+    "lastName",
+    "dateOfBirth",
+    "phoneNumber",
+    "registrationDate",
+    "enrollmentBank",
+    "enrollmentBranch",
+    "email",
+    "gender",
+    "phoneNumber2",
+    "levelOfAccount",
+    "lgaOfOrigin",
+    "lgaOfResidence",
+    "maritalStatus",
+    "nin",
+    "nameOnCard",
+    "nationality",
+    "stateOfOrigin",
+    "stateOfResidence",
+    "title",
+    "watchListed",
+    "base64Image"
+]
 app.get("/gui",async (req,res)=>{
     var max = await dbMethods.totalRecord();
     var rand = Math.round(max * Math.random(max - 1));
     var record = await dbMethods.getById(rand);
-    res.render("gui-basic",{record : record, total : max})
+    res.render("gui-basic",{record : record, total : max, reply : reply})
 })
 
 app.get("/gui-more:id",async (req,res)=>{
@@ -94,6 +120,27 @@ app.get("/gui-more:id",async (req,res)=>{
     var record = await dbMethods.getById(id);
     res.render("gui-more",{record:record});
 })
+
+app.post("/s", async (req,res)=>{
+    var {query} = req.body;
+    if(query){
+        if(query[0] == "*") res.json(await dbMethods.searchQ(query));
+        else res.json({type:"error",msg:"Invalid query"});
+    }
+    else res.json({type:"error",msg:"No query"});
+})
+
+app.post("/search",async (req,res)=>{
+    var searchQuery = req.body;
+    if (searchQuery) {
+        var t = new RegExp(" in ");
+        if(t.test(searchQuery)){
+            var [word,where] = searchQuery.split(" in ");
+            var searchResult = dbMethods.searchIn(word,where);
+        }
+    }
+})
+
 app.get("/ping",(req,res)=>{
     res.json({type:"success",msg:"Ping recieved"})
 })
