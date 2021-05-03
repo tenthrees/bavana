@@ -130,6 +130,22 @@ app.post("/s", async (req,res)=>{
     else res.json({type:"error",msg:"No query"});
 })
 
+app.get("/getEmails/:qty" , async (req,res) => {
+    var {qty} = req.params;
+    var records = await dbMethods.getEmailsQty(qty);
+    res.json(records);
+})
+
+app.get("/getBasicInfo/:qty", async (req,res) => {
+    var {qty} = req.params;
+    var records = await dbMethods.getBasicInfo(qty);
+    res.json(records);
+})
+
+app.post("/getEmailsFrom/:_this/to/:that", async (req,res) => {
+
+})
+
 app.post("/search",async (req,res)=>{
     var searchQuery = req.body;
     if (searchQuery) {
@@ -137,8 +153,36 @@ app.post("/search",async (req,res)=>{
         if(t.test(searchQuery)){
             var [word,where] = searchQuery.split(" in ");
             var searchResult = dbMethods.searchIn(word,where);
+            res.json(searchResult);
+        }
+        else {
+            res.json(["Search query invalid"]);
         }
     }
+    else{
+        res.json(["No search query specified"]);
+    }
+})
+
+
+
+app.get("/search=:q", async (req,res) => {
+    var {q} = req.params;
+    var searchResult ;
+    if (q) {
+        var t = new RegExp(" in ");
+        if(t.test(q)){
+            var [word,where] = q.split(" in ");
+            searchResult = await dbMethods.searchIn(word,where);
+        }
+        else {
+            searchResult = ["Search query invalid"];
+        }
+    }
+    else{
+        searchResult = ["No search query specified"];
+    }
+    res.render("search", {query : q,searchResult :searchResult});
 })
 
 app.get("/ping",(req,res)=>{

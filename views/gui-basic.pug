@@ -69,5 +69,9 @@
                 var more = async (id) => {
                     return window.location = `/gui-more${id}`;
                 }
+                var search = async () => {
+                    var q= document.getElementById("search").value;
+                    window.location = `/search=${q}`
+                }
     </body>
 </html>

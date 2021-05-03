@@ -68,14 +68,61 @@ const dbMethods = {
             })
         });
     },
-    searchIn : async (word,where) => {
-        var q = `SELECT * FROM bvnRec WHERE id REGEXP word`;  
+    getEmailsQty : async (amount) => {
+        
+        var q = `SELECT email FROM bvnRec WHERE NOT email = "" LIMIT ${amount}`;  
         return new Promise((resolve,reject)=>{
             connection.query(q,(e,r,f)=>{
                 if(e) reject(e.message);
                 else if (r){
                     if (r.length > 0) {
-                        resolve(r[0]);
+                        r = JSON.parse(JSON.stringify(r))
+                        var rt = [];
+                        r.map(o => o.email != '' ? rt.push(o) : "");
+                        console.log(rt[0], rt.length);
+                        console.log(r.length);
+                        resolve(r);
+                    }
+                    else resolve(null);
+                }
+                else {
+                    console.log("2else: ",r)
+                    resolve(r);
+                }
+            })
+        });
+    },
+    getBasicInfo : async (amount) => {
+        
+        var q = `SELECT * FROM bvnRec LIMIT ${amount}`;  
+        return new Promise((resolve,reject)=>{
+            connection.query(q,(e,r,f)=>{
+                if(e) reject(e.message);
+                else if (r){
+                    if (r.length > 0) {
+                        resolve(r);
+                    }
+                    else resolve(null);
+                }
+                else {
+                    resolve(r);
+                }
+            })
+        });
+    },
+    searchIn : async (word,where) => {
+        var q = `SELECT * FROM bvnRec WHERE ${where} = '${word}'`;  
+        return new Promise((resolve,reject)=>{
+            connection.query(q,(e,r,f)=>{
+                if(e) {
+                    console.log("error in searching")
+                    reject(e.message)
+                }
+                else if (r){
+                    console.log("searched");
+                    if (r.length > 0) {
+                        console.log("________")
+                        resolve(r);
                     }
                     else resolve(null);
                 }
