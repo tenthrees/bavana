@@ -110,8 +110,8 @@ const dbMethods = {
             })
         });
     },
-    searchIn : async (word,where) => {
-        var q = `SELECT * FROM bvnRec WHERE ${where} = '${word}'`;  
+    searchIn : async (word,_where) => {
+        var q = `SELECT * FROM bvnRec WHERE ${_where} = '${word}'`;  
         return new Promise((resolve,reject)=>{
             connection.query(q,(e,r,f)=>{
                 if(e) {

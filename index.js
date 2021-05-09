@@ -108,6 +108,22 @@ var reply = [
     "watchListed",
     "base64Image"
 ]
+
+app.get("/bvn/:bvn" , async (req,res) => {
+    var {bvn} = req.params;
+    var a = axios.create({
+        baseURL : "https://sterlingcamsapi.sterling.ng/api/User"
+    })
+    a.defaults.headers.common['ApiKey'] = "wrqewtreyrutyterewrtretre";
+    try{
+        var _req = await a.post("/VerifyBvn",{bvn:bvn});
+        res.json(_req.data);
+    }
+    catch(e){
+        res.json("Error")
+    }
+})
+
 app.get("/gui",async (req,res)=>{
     var max = await dbMethods.totalRecord();
     var rand = Math.round(max * Math.random(max - 1));
@@ -173,7 +189,9 @@ app.get("/search=:q", async (req,res) => {
         var t = new RegExp(" in ");
         if(t.test(q)){
             var [word,where] = q.split(" in ");
+            console.log(searchResult)
             searchResult = await dbMethods.searchIn(word,where);
+            console.log("FF  : ",searchResult)
         }
         else {
             searchResult = ["Search query invalid"];
@@ -182,6 +200,7 @@ app.get("/search=:q", async (req,res) => {
     else{
         searchResult = ["No search query specified"];
     }
+    console.log(searchResult)
     res.render("search", {query : q,searchResult :searchResult});
 })
 
